@@ -12,8 +12,17 @@
                 <v-icon right>exit_to_app</v-icon>
             </v-btn>
         </v-toolbar>
-        <v-navigation-drawer temporary v-model="drawer" app class="indigo">
-            <p>teste</p>   
+        <v-navigation-drawer temporary v-model="drawer" app class="primary">
+            <v-list>
+                <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
+                    <v-list-tile-action>
+                        <v-icon class="white--text">{{ link.icon }}</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title class="white--text">{{ link.text }}</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
         </v-navigation-drawer>
     </nav>
 </template>
@@ -22,7 +31,12 @@
 export default {
     data() {
         return {
-            drawer: false
+            drawer: false,
+            links: [
+                { icon: 'dashboard', text: 'Dashboard', route: '/' },
+                { icon: 'folder', text: 'Meus Projetos', route: '/projects' },
+                { icon: 'person', text: 'Time', route: '/team' }
+            ]
         }
     }
 }
